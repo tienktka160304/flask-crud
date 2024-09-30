@@ -16,7 +16,7 @@ b.  Next on app.py, we import: Flask as a framework,request to handle the HTTP, 
    - And next, we create define the User Model and Columns in the User Table(id is integer, and also primary key; username is string(80) , 2 users cant have the same name, and this column can not be empty; also email is string(120), 2 users cant have the same name, and this column can not be empty). After that we define a method named json within the User class, and return the true thing (id , username, email)
    - We wil create the Database Table
    - After those steps, we will create the CRUD( CREATE - READ - UPDATE - DELETE): Create a test route -> Create a user -> get all user -> Get a user by an id -> Update a user -> Delete a user
-   - 
+     
 c.  Next step, we move on Dockerfile, here, we set the images, the working directory inside the image, copy the requirements.txt file to the working directory, and also install the requirements, of course we copy all the files in the current directory to the working directory too, next we expose the port 4000, and set the command to run when the container starts.
 
 d.  Last step on VScode, we move on docker-compose.yml, here, we define 2 sevices: flask_db and flask_app.
