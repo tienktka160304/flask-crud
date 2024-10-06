@@ -42,7 +42,6 @@ def create_user():
 # get all users
 @cache.cached(timeout=300)
 @app.route('/users', methods=['GET'])
-
 def get_users():
   try:
     users = User.query.all()
