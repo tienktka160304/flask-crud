@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
+from flask_caching import Cache
 from os import environ
 
 app = Flask(__name__)
+app.config['CACHE_TYPE'] = 'simple'
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URL')
+cache = Cache(app)
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -37,7 +40,9 @@ def create_user():
     return make_response(jsonify({'message': 'error creating user'}), 500)
 
 # get all users
+@cache.cached(timeout=300)
 @app.route('/users', methods=['GET'])
+
 def get_users():
   try:
     users = User.query.all()
