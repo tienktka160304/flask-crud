@@ -33,3 +33,5 @@ d.  Last step on VScode, we move on docker-compose.yml, here, we define 2 sevice
  	- (max its 80)        "username": "...",
 	- (max its 120)       "email": "...@gmail.com"
   	- }
+### Note:
+In this branch, we add cache and redis to get all user faster.
