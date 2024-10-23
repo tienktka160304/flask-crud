@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
+from flask_caching import Cache
+import json
 from os import environ
 
 app = Flask(__name__)
+app.config['CACHE_TYPE'] = 'simple'
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URL')
+cache = Cache(app)
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -37,6 +41,7 @@ def create_user():
     return make_response(jsonify({'message': 'error creating user'}), 500)
 
 # get all users
+@cache.cached(timeout=300)
 @app.route('/users', methods=['GET'])
 def get_users():
   try:
@@ -44,7 +49,6 @@ def get_users():
     return make_response(jsonify([user.json() for user in users]), 200)
   except e:
     return make_response(jsonify({'message': 'error getting users'}), 500)
-
 # get a user by id
 @app.route('/users/<int:id>', methods=['GET'])
 def get_user(id):

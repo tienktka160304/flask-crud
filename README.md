@@ -1,6 +1,6 @@
 #Project about Flask-CRUD-api:
 
-![Screenshot](flask.png)
+![Screenshot](static/images/flask.png)
 -
 -Here is the picture for you to imagine how the app works
 ## Description
